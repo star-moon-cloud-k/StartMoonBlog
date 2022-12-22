@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import logo from './logo.svg';
+import './App.css';
+import { Route, Routes } from 'react-router';
+import MainPage from './pages/MainPage';
+import PostPage from './pages/PostPage';
+import AdminPage from './pages/AdminPage';
+import Router from './pages/Router';
+import Header from './components/common/Header';
 
-function App() {
-  const [hello, setHello] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("/api/hello")
-      .then((response) => setHello(response.data))
-      .catch((error) => console.log(error));
-  }, []);
-
-  return <div>백엔드에서 가져온 데이터입니다 : {hello}</div>;
-}
+const App = () => {
+	return (
+		<>
+			<Header />
+			<Router />
+		</>
+	);
+};
 
 export default App;
