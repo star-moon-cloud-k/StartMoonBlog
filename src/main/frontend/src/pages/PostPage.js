@@ -1,9 +1,10 @@
 import React from 'react';
+import PostViewerContainer from '../containers/post/PostViewerContainer';
 
 const PostPage = () => {
 	return (
 		<>
-			<h1>PostPage</h1>
+			<PostViewerContainer />
 		</>
 	);
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
-import { Link } from '../../../node_modules/react-router-dom/index';
+import { Link } from 'react-router-dom';
 
 const TagsBlock = styled.div`
 	margin-top: 0.5rem;

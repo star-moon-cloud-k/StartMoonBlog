@@ -1,14 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Link } from '../../../node_modules/react-router-dom/index';
+import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 
 const SubInfoBlock = styled.div`
-	${props =>
+	/* ${props =>
 		props.hasMarginTop &&
 		css`
 			margin-top: 1rem;
-		`}
+		`} */
 	color: ${palette.gray[6]};
 
 	/* span 사이에 가운뎃 점 문자 보여주기 */
@@ -20,12 +20,15 @@ const SubInfoBlock = styled.div`
 		content: '\\B7'; /* 가운뎃점 문자 */
 	}
 `;
+const StyledLink = styled(Link)`
+	color: ${palette.gray[6]};
+`;
 
 const SubInfo = ({ username, publishedDate, hasMarginTop }) => {
 	return (
 		<SubInfoBlock hasMarginTop={hasMarginTop}>
 			<span>
-				<Link to={`/@${username}`}>{username}</Link>
+				<StyledLink to={`/@${username}`}>{username}</StyledLink>
 			</span>
 			<span>{new Date(publishedDate).toLocaleDateString()}</span>
 		</SubInfoBlock>

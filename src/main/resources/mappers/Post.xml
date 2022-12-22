@@ -3,11 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.starmoonblog.mapper.PostMapper">
     <select id="selectEmployees" resultType="map">
-        select * from "board_post"
+        select "post_id" as id , "post_title" as title , "post_content" as body , "post_date" as publishedDate from "board_post"
     </select>
 
     <insert id="postInsert" parameterType="com.example.starmoonblog.dao.BoardPostDao">
         insert into "board_post"("post_id", "post_title", "post_content", "post_date" , "post_updated_date")
         VALUES (postSeq.nextval ,#{post_title}, #{post_content},  #{post_date} ,#{post_updated_date})
     </insert>
+
+    <select id="selectPost" resultType="com.example.starmoonblog.dao.BoardPostDao" parameterType="Integer">
+        select * from "board_post" where "post_id" = #{id}
+    </select>
 </mapper>

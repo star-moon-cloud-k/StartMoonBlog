@@ -1,10 +1,11 @@
 import React from 'react';
-import Main from '../components/Main/Main';
-import axios from 'axios';
+
+import PostListContianer from '../containers/post/PostListContainer';
+
 const MainPage = () => {
 	return (
 		<>
-			<Main />
+			<PostListContianer />
 		</>
 	);
 };

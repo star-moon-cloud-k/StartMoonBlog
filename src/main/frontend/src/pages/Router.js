@@ -3,7 +3,6 @@ import { Route, Routes, Link } from 'react-router-dom';
 import MainPage from './MainPage';
 import PostPage from './PostPage';
 import AdminPage from './AdminPage';
-import Editor from '../components/Post/Editor';
 import WritePage from './WritePage';
 
 const Router = () => {
@@ -11,7 +10,7 @@ const Router = () => {
 		<Routes>
 			<Route path="/" element={<MainPage />} />
 			<Route path="/write" element={<WritePage />} />
-			<Route path="/post" element={<PostPage />} />
+			<Route path="/post/:ID" element={<PostPage />} />
 			<Route path="/admin" element={<AdminPage />} />
 		</Routes>
 	);

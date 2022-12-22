@@ -20,18 +20,21 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("/api/hello")
-    public List<HashMap<String , Object>> Test() throws Exception{
-        List<HashMap<String, Object>> list = postService.selectAll();
-//        ArrayList <HashMap<String, String>> list2= new ArrayList<>();
-//        HashMap<String, String> map = new HashMap<>();
-//        map.put("test", "test");
-//        list2.add(map);
+    @GetMapping("/api/posts")
+    public ArrayList<PostDTO> PostList(@RequestParam int page) throws Exception{
+        ArrayList<PostDTO> list = postService.selectAll();
+        return list;
+    }
+
+    @GetMapping("/api/post")
+    public PostDTO PostRead(@RequestParam int id) throws Exception{
+        PostDTO list = postService.selectPost(id);
+
 
         return list;
     }
-    @PostMapping("/api/posts")
-    public List<HashMap<String, Object>> Test2(@RequestBody PostDTO postDTO) throws Exception{
+    @PostMapping("/api/post")
+    public List<HashMap<String, Object>> PostWrite(@RequestBody PostDTO postDTO) throws Exception{
         postService.insertPost(postDTO);
 
         return null;

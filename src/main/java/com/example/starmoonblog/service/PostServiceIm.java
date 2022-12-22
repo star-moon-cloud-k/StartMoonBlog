@@ -7,8 +7,7 @@ import com.example.starmoonblog.module.GetTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,8 +16,10 @@ public class PostServiceIm implements PostService {
     private PostMapper postMapper;
 
     @Override
-    public List<HashMap<String, Object>> selectAll() throws Exception {
-        return postMapper.selectEmployees();
+    public ArrayList<PostDTO> selectAll() throws Exception {
+        ArrayList<PostDTO> postDTO = postMapper.selectEmployees();
+
+        return postDTO;
     }
 
     @Override
@@ -32,5 +33,16 @@ public class PostServiceIm implements PostService {
         boardPostDao.setPost_updated_date(now.nowTime());
         boardPostDao.setPost_comment_updated_date(now.nowTime());
         postMapper.postInsert(boardPostDao);
+    }
+
+    @Override
+    public PostDTO selectPost(int id) throws Exception {
+        BoardPostDao boardPostDao = postMapper.selectPost(id);
+        PostDTO postDTO = new PostDTO();
+        postDTO.setId(boardPostDao.getPost_id());
+        postDTO.setPublishedDate(boardPostDao.getPost_date());
+        postDTO.setTitle(boardPostDao.getPost_title());
+        postDTO.setBody(boardPostDao.getPost_content());
+        return postDTO;
     }
 }
