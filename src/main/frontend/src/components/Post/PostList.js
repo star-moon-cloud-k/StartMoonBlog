@@ -6,7 +6,7 @@ import palette from '../../lib/styles/palette';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
 import { Link } from 'react-router-dom';
-
+import dompurify from 'dompurify';
 const PostListBlock = styled(Responsive)`
 	margin-top: 3rem;
 `;
@@ -14,19 +14,18 @@ const PostListBlock = styled(Responsive)`
 const WritePostButtonWrapper = styled.div`
 	display: flex;
 	justify-content: flex-end;
-	margin-bottom: 3rem;
+	margin-bottom: 1rem;
+	background: #eeeeee;
+	float: left;
+	width: 60%;
 `;
 
 const PostItemBlock = styled.div`
-	padding-top: 3rem;
-	padding-bottom: 3rem;
-	/* 맨 위 포스트는 padding-top 없음*/
-	& + :first-child {
-		padding-top: 0;
-	}
-	& + & {
-		border-top: 1px solid ${palette.gray[2]};
-	}
+	padding-top: 0rem;
+	padding-bottom: 5rem;
+	overflow: auto;
+	float: left;
+	width: 33%;
 
 	h2 {
 		font-size: 1.5rem;
@@ -51,6 +50,9 @@ const StyledLink = styled(Link)`
 `;
 const PostItem = ({ post }) => {
 	const { PUBLISHEDDATE, TITLE, BODY, ID } = post;
+	let b = { BODY };
+	b = b.length < 200 ? b : b.BODY.slice(0, 200).concat('. . .');
+
 	return (
 		<PostItemBlock>
 			<h2>
@@ -58,7 +60,7 @@ const PostItem = ({ post }) => {
 			</h2>
 			<SubInfo username="starmooncloudk" publishedDate={new Date(PUBLISHEDDATE)} />
 			{/* <Tags tags={tags} /> */}
-			<p>{BODY}</p>
+			<p dangerouslySetInnerHTML={{ __html: b }} />
 		</PostItemBlock>
 	);
 };
@@ -67,13 +69,9 @@ const PostList = ({ posts, loading, error }) => {
 	if (error) {
 		return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
 	}
+
 	return (
 		<PostListBlock>
-			<WritePostButtonWrapper>
-				<Button cyan to="/write">
-					새 글 작성하기
-				</Button>
-			</WritePostButtonWrapper>
 			{!loading && posts && (
 				<>
 					{posts.map(post => (

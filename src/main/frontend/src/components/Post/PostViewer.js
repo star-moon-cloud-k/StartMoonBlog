@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
-
+import Tags from '../common/Tags';
 const PostViewerBlock = styled(Responsive)`
 	margin-top: 4rem;
 `;
@@ -29,24 +29,11 @@ const SubInfo = styled.div`
 	}
 `;
 
-const Tags = styled.div`
-	margin-top: 0.5rem;
-	.tag {
-		display: inline-block;
-		color: ${palette.cyan[7]};
-		text-decoration: none;
-		margin-right: 0.5rem;
-		&:hover {
-			color: ${palette.cyan[6]};
-		}
-	}
-`;
-
 const PostContent = styled.div`
 	font-size: 1.3125rem;
 	color: ${palette.gray[8]};
 `;
-const PostViewer = ({ post, error, loading }) => {
+const PostViewer = ({ post, error, loading, PostActionButtons }) => {
 	//에러 발생시
 	if (error) {
 		if (error.response && error.response.status === 404) {
@@ -59,26 +46,19 @@ const PostViewer = ({ post, error, loading }) => {
 	if (loading || !post) {
 		return null;
 	}
-
 	const { title, body, publishedDate, tags } = post;
 	return (
 		<PostViewerBlock>
 			<PostHead>
 				<h1>{title}</h1>
+				{PostActionButtons}
 				<SubInfo>
 					<span>
 						<b>starmooncloudk</b>
 					</span>
 					<span>{new Date(publishedDate).toLocaleDateString()}</span>
 				</SubInfo>
-				<Tags>
-					{tags &&
-						tags.map(tag => {
-							<div className="tag" id={tags.id}>
-								#{tag}
-							</div>;
-						})}
-				</Tags>
+				<Tags tags={tags} />
 			</PostHead>
 			<PostContent dangerouslySetInnerHTML={{ __html: body }} />
 		</PostViewerBlock>

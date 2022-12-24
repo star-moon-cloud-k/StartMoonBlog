@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import palette from '../../lib/styles/palette';
 
 const TopMenuComponent = () => {
 	const [isShow, setShow] = useState('true');
@@ -14,12 +15,9 @@ const TopMenuComponent = () => {
 			{/* <SideButton onClick={() => toggleMenu()}>메뉴 토글</SideButton> */}
 			<SideDiv>
 				<Link to="/">
-					<SideButton>Home</SideButton>
+					<SideButton>HOME</SideButton>
 				</Link>
 
-				<Link to="/post" className={isShow ? 'ShowMenu' : 'HideMenu'}>
-					<SideButton>POST</SideButton>
-				</Link>
 				<Link to="/write">
 					<SideButton>WRITE</SideButton>
 				</Link>
@@ -31,37 +29,17 @@ const TopMenuComponent = () => {
 	);
 };
 
-const ImageWrapped = styled.div`
-	width: 3rem;
-	height: 3rem;
-	border: 1ch;
-	/* border: 1px solid black; */
-	float: left;
-`;
-const StyledImg = styled.img`
-	height: 3rem;
-	width: 3rem;
-	height: auto;
-	/* border: 1px solid red; */
-	&:hover {
-		color: #0283bf;
-		cursor: pointer;
-	}
-`;
-
-const SideDiv = styled.ul`
-	border: 1px solid black;
-	width: 100%;
-	height: 3rem;
-
-	/* float: left; */
+const SideDiv = styled.div`
+	width: 40%;
+	margin-bottom: 0rem;
+	float: center;
 `;
 
 const SideButton = styled.button`
 	border: 0px solid red;
-	padding: 0.5rem;
+	padding: 1.5rem;
 	margin: 0rem;
-	color: #0649a8;
+	color: ${palette.gray[7]};
 	font-weight: bold;
 	width: 13%;
 	height: 3rem;

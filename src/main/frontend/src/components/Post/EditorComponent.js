@@ -6,20 +6,8 @@ import styled from 'styled-components';
 
 const EditorBlock = styled(Responsive)`
 	/* 페이지 위 아래 여백 지정 */
-	padding-top: 5rem;
-	padding-bottom: 5rem;
-`;
-const QuillWrapper = styled.div`
-	/* 최고 크기 지정 및 padding 제거 */
-	.ql-editor {
-		padding: 0;
-		min-height: 320px;
-		font-size: 1.125rem;
-		line-height: 1.5;
-	}
-	.ql-editor.ql-blank::before {
-		left: 0px;
-	}
+	padding-top: rem;
+	padding-bottom: 1rem;
 `;
 const TitleInput = styled.input`
 	font-size: 3rem;
@@ -71,12 +59,14 @@ const EditorComponent = ({ title, body, onChangeField }) => {
 			<EditorBlock>
 				<TitleInput placeholder="제목을 입력하세요" onChange={onChangeTitle} value={title} />
 				<ReactQuill
-					style={{ height: '600px' }}
+					style={{ height: '500px' }}
 					theme="snow"
 					modules={modules}
 					formats={formats}
 					value={body || ''}
-					onChange={(content, delta, source, editor) => onChangeField(editor.getHTML())}
+					onChange={(content, delta, source, editor) =>
+						onChangeField({ key: 'body', value: editor.getHTML() })
+					}
 				/>
 			</EditorBlock>
 		</div>

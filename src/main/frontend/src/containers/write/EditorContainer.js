@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import Editor from '../../components/Post/Editor';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeField, initialize } from '../../modules/write';
+import EditorComponent from '../../components/Post/EditorComponent';
 
 const EditorContainer = () => {
 	const dispatch = useDispatch();
@@ -18,7 +19,8 @@ const EditorContainer = () => {
 			dispatch(initialize());
 		};
 	}, [dispatch]);
-	return <Editor onChangeField={onChangeField} title={title} body={body} />;
+	// return <Editor onChangeField={onChangeField} title={title} body={body} />;
+	return <EditorComponent onChangeField={onChangeField} title={title} body={body} />;
 };
 
 export default EditorContainer;
