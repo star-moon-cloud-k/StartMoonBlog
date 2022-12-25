@@ -2,16 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.starmoonblog.mapper.PostMapper">
-    <select id="selectEmployees" resultType="map">
-        select "post_id" as id , "post_title" as title , "post_content" as body , "post_date" as publishedDate from "board_post"
+    <select id="selectPostList" resultType="map">
+        select "post_id" as id , "post_title" as title , "post_content" as body , "post_date" as publishedDate from "board_post" order by publishedDate desc
     </select>
 
     <insert id="postInsert" parameterType="com.example.starmoonblog.dao.BoardPostDao">
         insert into "board_post"("post_id", "post_title", "post_content", "post_date" , "post_updated_date")
         VALUES (postSeq.nextval ,#{post_title}, #{post_content},  #{post_date} ,#{post_updated_date})
+
     </insert>
 
+    <insert id="postTagInsert" parameterType="com.example.starmoonblog.dao.BoardPostDao">
+        insert into "board_tags"("post_id", "tag")
+        VALUES (#{id} ,#{tag})
+
+    </insert>
     <select id="selectPost" resultType="com.example.starmoonblog.dao.BoardPostDao" parameterType="Integer">
         select * from "board_post" where "post_id" = #{id}
+    </select>
+
+    <select id ="selectKey" resultType="Integer" >
+        SELECT "LAST_NUMBER" FROM user_sequences WHERE sequence_name=upper('POSTSEQ')
+    </select>
+
+    <select id="selectPostTags" resultType="map">
+        select "tag" from "board_tags" where "post_id" = #{id}
+    </select>
+    <delete id="deletePost" parameterType="Integer">
+        delete from "board_post" where "post_id" = #{id}
+    </delete>
+
+    <insert id="insertComment" parameterType="com.example.starmoonblog.dto.CommentDTO">
+        insert into "board_comment"("cmt_post_id" ,"comment", "user_name", "comment_number") VALUES (#{postId}, #{comment}, #{name}, #{commentNumber})
+    </insert>
+
+    <select id="selectCommentCount" parameterType="Integer" resultType="Integer">
+        SELECT COUNT(*) from "board_comment" WHERE "cmt_post_id" = #{postId}
+    </select>
+
+    <select id="selectComments" parameterType="com.example.starmoonblog.dto.CommentDTO" resultType="com.example.starmoonblog.dto.CommentDTO">
+        select "cmt_post_id" as postId , "comment" , "user_name" as name , "comment_number" as commentNumber from "board_comment" where "cmt_post_id" = #{postId}
     </select>
 </mapper>

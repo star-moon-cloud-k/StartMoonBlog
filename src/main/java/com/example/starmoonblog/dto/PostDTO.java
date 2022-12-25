@@ -15,4 +15,6 @@ public class PostDTO {
     private String body;
     private List<String> tags;
     private java.sql.Timestamp publishedDate;
+
 }
+

@@ -33,6 +33,7 @@ const SideDiv = styled.div`
 	width: 40%;
 	margin-bottom: 0rem;
 	float: center;
+	margin-left: 15%;
 `;
 
 const SideButton = styled.button`
