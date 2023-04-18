@@ -1,4 +1,4 @@
-package com.example.starmoonblog.dao;
+package com.k.starmoonblog.dao;
 
 import lombok.*;
 

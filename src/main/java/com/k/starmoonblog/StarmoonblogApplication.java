@@ -1,13 +1,14 @@
 package com.example.starmoonblog;
 
+import com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
 import javax.sql.DataSource;
 /*
 src/main/java : 패키지와 클래스 파일
@@ -15,11 +16,13 @@ src/main/resource
 -application.properties : 환경설정파일
 -pom.xml : Maven 라이브러리 설정파일
 */
+@EnableDiscoveryClient
 @SpringBootApplication
 public class StarmoonblogApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(StarmoonblogApplication.class, args);
+
     }
 
     @Bean //이 메서드를 객체생성해줘야 한다.

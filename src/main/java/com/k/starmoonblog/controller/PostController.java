@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
 public class PostController {
 
     @Resource
@@ -22,13 +23,13 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("/api/posts")
+    @GetMapping("/posts")
     public ArrayList<PostDTO> PostList(@RequestParam int page) throws Exception{
         ArrayList<PostDTO> list = postService.selectAll();
         return list;
     }
 
-    @GetMapping("/api/post")
+    @GetMapping("/post")
     public PostDTO PostRead(@RequestParam int id) throws Exception{
         PostDTO list = postService.selectPost(id);
 
@@ -42,12 +43,12 @@ public class PostController {
 
         return key;
     }
-    @DeleteMapping("/api/post")
+    @DeleteMapping("/post")
     public void PostDelete(@RequestParam int id) throws Exception{
         postService.deletePost(id);
     }
 
-    @PostMapping("/api/comment")
+    @PostMapping("/comment")
     public CommentDTO PostComment(@RequestBody CommentDTO commentDTO) throws Exception{
         System.out.println(commentDTO);
         postService.insertComment(commentDTO);
@@ -56,7 +57,7 @@ public class PostController {
 
         return commentDTO;
     }
-    @GetMapping("/api/comments")
+    @GetMapping("/comments")
     public List<CommentDTO> ReadComment(@RequestParam int id) throws Exception{
         System.out.println(id);
         List<CommentDTO> commentDTOList = postService.selectComments(id);

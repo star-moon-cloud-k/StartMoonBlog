@@ -1,4 +1,4 @@
-package com.example.starmoonblog.dto;
+package com.k.starmoonblog.dto;
 
 import lombok.*;
 
